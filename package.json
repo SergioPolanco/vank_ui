@@ -2,6 +2,7 @@
   "name": "vank_ui",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://SergioPolanco.github.io/vank_ui",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
