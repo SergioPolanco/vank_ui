@@ -20,6 +20,7 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
+          <NavLink text="Registration" href='/registration'/>
           <NavLink text="Users" href='/users'/>
           <NavLink text="Invoices" href='/invoices'/>
         </Toolbar>

@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import InvoicesTable from "./components/invoicesTable"
+import InvoicesTable from "../components/invoicesTable"
 
 const Invoice = () => {
   return (
