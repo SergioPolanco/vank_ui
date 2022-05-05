@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux'
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import App from './app';
 import reportWebVitals from './reportWebVitals';
+import store from './app/redux/store';
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>    
   </React.StrictMode>
 );
 
