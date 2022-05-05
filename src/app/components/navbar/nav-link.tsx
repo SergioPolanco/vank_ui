@@ -17,14 +17,14 @@ const LinkStyled = styled(Link)`
       background-color: rgba(144, 202, 249, 0.08);
     }
   }
-`
+`;
 
 const NavLink = ({ text, href }: NavLinkProps) => {
   return (
-    <Typography className='nav' variant="h6" component={LinkStyled} href={href}>
+    <Typography className="nav" variant="h6" component={LinkStyled} href={href}>
       {text}
     </Typography>
-  )
-}
+  );
+};
 
-export default NavLink
+export default NavLink;

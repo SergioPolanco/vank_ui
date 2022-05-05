@@ -1,16 +1,14 @@
-import api from "../../common/config/api";
+import api from '../../common/config/api';
 
 export interface RegisterBody {
   companyName: string;
   internalCode: number;
   tributaryId?: string;
-  apiCalls: number,
+  apiCalls: number;
   currency?: string;
-  banks: number[]
+  banks: number[];
 }
 
-const register = (body: RegisterBody) => api.post('/v1/registration', body)
+const register = (body: RegisterBody) => api.post('/v1/registration', body);
 
-export {
-  register
-}
+export { register };

@@ -13,7 +13,6 @@ import { fetchBanks } from '../../services/bank.service';
 import { openNotification } from '../../../notification/redux/notificationSlice';
 import { Bank } from '../../interfaces/bank';
 
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -29,79 +28,85 @@ interface BankSelectorProps {
   labelText: string;
   name: string;
   banksSelected: number[];
-  arrayHelper: FieldArrayRenderProps
+  arrayHelper: FieldArrayRenderProps;
 }
 
-const BankSelector = ({ banksSelected, name, arrayHelper, labelText }: BankSelectorProps) => {
+const BankSelector = ({
+  banksSelected,
+  name,
+  arrayHelper,
+  labelText,
+}: BankSelectorProps) => {
   const [banks, setBanks] = useState<Bank[]>([]);
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchBanksWrapper = async () => {
       try {
-        setLoading(true)
-        const response = await fetchBanks()
-        setBanks(response.data)
-        setLoading(false)
+        setLoading(true);
+        const response = await fetchBanks();
+        setBanks(response.data);
+        setLoading(false);
       } catch (error) {
         openNotification({
-          severity: "error",
-          message: "Error retrieving banks"
-        })
-        setLoading(false)
+          severity: 'error',
+          message: 'Error retrieving banks',
+        });
+        setLoading(false);
       }
-    }
-
-    fetchBanksWrapper()
-  }, [])
+    };
+    fetchBanksWrapper();
+  }, []);
 
   const handleCheckBoxChange = (bankId: number, isChecked: boolean) => {
     if (isChecked) {
-      arrayHelper.remove(bankId)
+      const index = banksSelected.indexOf(bankId);
+      arrayHelper.remove(index);
       return;
     }
-    arrayHelper.insert(bankId, bankId)
-  }
+    arrayHelper.insert(bankId, bankId);
+  };
 
   return (
     <FormControl sx={{ m: 1, width: 300 }}>
-      <InputLabel id={`${name}-label`}>
-        {labelText}
-      </InputLabel>
+      <InputLabel id={`${name}-label`}>{labelText}</InputLabel>
       <Select
         labelId={`${name}-label`}
         multiple
         value={banksSelected}
-        renderValue={
-          (selected) => 
-            banks.filter(bank => selected.includes(bank.id))
-            .map(bank => bank.name).join(',')
+        renderValue={(selected) =>
+          banks
+            .filter((bank) => selected.includes(bank.id))
+            .map((bank) => bank.name)
+            .join(',')
         }
         input={<OutlinedInput label={labelText} />}
         MenuProps={MenuProps}
       >
-        { 
-          loading ? (
-            <Box sx={{ display: 'flex' }}>
-              <CircularProgress />
-            </Box>
-          ) : banks.map((bank) => (
+        {loading ? (
+          <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          banks.map((bank) => (
             <MenuItem key={bank.name} value={bank.name}>
               <Checkbox
                 name={`${name}.${bank.id}`}
-                onChange={() => handleCheckBoxChange(
-                  bank.id,
-                  banksSelected.indexOf(bank.id) > -1
-                )}
+                onChange={() =>
+                  handleCheckBoxChange(
+                    bank.id,
+                    banksSelected.indexOf(bank.id) > -1,
+                  )
+                }
                 checked={banksSelected.indexOf(bank.id) > -1}
               />
               <ListItemText primary={bank.name} />
             </MenuItem>
           ))
-        }
+        )}
       </Select>
     </FormControl>
-  )
-}
+  );
+};
 
-export default BankSelector
+export default BankSelector;

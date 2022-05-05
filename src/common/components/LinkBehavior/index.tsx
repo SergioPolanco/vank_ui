@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
@@ -9,7 +9,9 @@ const LinkBehavior = React.forwardRef<
   Omit<RouterLinkProps, 'to'> & { href: RouterLinkProps['to'] }
 >((props, ref) => {
   const { href, ...other } = props;
-  return <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />;
+  return (
+    <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />
+  );
 });
 
-export default LinkBehavior
+export default LinkBehavior;

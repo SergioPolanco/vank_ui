@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Invoice } from '../interfaces/invoce';
 
 export interface InvoiceState {
   items: Invoice[];
-  loading: boolean
+  loading: boolean;
 }
 
 const initialState: InvoiceState = {
@@ -16,15 +16,15 @@ export const invoiceSlice = createSlice({
   initialState,
   reducers: {
     getInvoices: (state) => {
-      state.loading = true
+      state.loading = true;
     },
     setInvoices: (state, action: PayloadAction<Invoice[]>) => {
-      state.items = action.payload
-      state.loading = false
-    }
+      state.items = action.payload;
+      state.loading = false;
+    },
   },
-})
+});
 
-export const { getInvoices, setInvoices } = invoiceSlice.actions
+export const { getInvoices, setInvoices } = invoiceSlice.actions;
 
-export default invoiceSlice.reducer
+export default invoiceSlice.reducer;

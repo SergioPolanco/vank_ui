@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -20,70 +20,73 @@ interface Values {
 }
 
 interface UserInfo extends Values {
-  companyName: string
+  companyName: string;
 }
 
 const UserDetail = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     tributaryId: '',
     currency: '',
-    companyName: ''
-  })
+    companyName: '',
+  });
   const dispatch = useDispatch();
-  const { id } = useParams()
+  const { id } = useParams();
 
-  const handleOnSubmit = async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-    const { tributaryId, currency } = values
+  const handleOnSubmit = async (
+    values: Values,
+    { setSubmitting }: FormikHelpers<Values>,
+  ) => {
+    const { tributaryId, currency } = values;
     const body = {
       ...(tributaryId && { tributaryId }),
       ...(currency && { currency }),
-    }
-  
+    };
+
     try {
-      await updateUser(id as string, body)
+      await updateUser(id as string, body);
       dispatch(
         openNotification({
-          severity: "success",
-          message: "Updated"
-        })
-      )
-      setSubmitting(false)
+          severity: 'success',
+          message: 'Updated',
+        }),
+      );
+      setSubmitting(false);
     } catch (error) {
       dispatch(
         openNotification({
-          severity: "error",
-          message: "An error has occurred"
-        })
-      )
-      setSubmitting(false)
+          severity: 'error',
+          message: 'An error has occurred',
+        }),
+      );
+      setSubmitting(false);
     }
-  }
+  };
 
   useEffect(() => {
     const fetchUserWrapper = async () => {
       try {
-        const response = await fetchUser(id as string)
+        const response = await fetchUser(id as string);
         setUserInfo({
           tributaryId: response.data.tributaryId,
           currency: response.data.currency,
-          companyName: response.data.companyName
-        })
+          companyName: response.data.companyName,
+        });
       } catch (error) {
         openNotification({
-          severity: "error",
-          message: "Error retrieving user information"
-        })
+          severity: 'error',
+          message: 'Error retrieving user information',
+        });
       }
     };
     fetchUserWrapper();
-  }, [id])
+  }, [id]);
 
   return (
     <Formik
       enableReinitialize
       initialValues={{
         tributaryId: userInfo.tributaryId,
-        currency: userInfo.currency
+        currency: userInfo.currency,
       }}
       validationSchema={UpdateUserSchema}
       onSubmit={handleOnSubmit}
@@ -107,24 +110,22 @@ const UserDetail = () => {
             <Grid item>
               <Field
                 component={Select}
-                formHelperText={{ children: 'What currency do you want to use?' }}
+                formHelperText={{
+                  children: 'What currency do you want to use?',
+                }}
                 id="currency"
                 name="currency"
                 labelId="currency-label"
                 label="Currency"
-              > 
-                {
-                  Object.keys(CURRENCIES).map(
-                    key => (
-                      <MenuItem
-                        key={`currency-option-${CURRENCIES[key as CURRENCIES]}`}
-                        value={CURRENCIES[key as CURRENCIES]}
-                      >
-                        {CURRENCIES[key as CURRENCIES]}
-                      </MenuItem>
-                    )
-                  )
-                }
+              >
+                {Object.keys(CURRENCIES).map((key) => (
+                  <MenuItem
+                    key={`currency-option-${CURRENCIES[key as CURRENCIES]}`}
+                    value={CURRENCIES[key as CURRENCIES]}
+                  >
+                    {CURRENCIES[key as CURRENCIES]}
+                  </MenuItem>
+                ))}
               </Field>
             </Grid>
           </Grid>
@@ -140,7 +141,7 @@ const UserDetail = () => {
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};
 
-export default UserDetail
+export default UserDetail;

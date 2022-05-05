@@ -1,1 +1,1 @@
-export const a = "dsf"
+export const a = 'dsf';

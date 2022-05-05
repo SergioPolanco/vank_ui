@@ -19,38 +19,41 @@ interface Values {
   tributaryId: string;
   apiCalls: number;
   currency: string;
-  banks: number[]
+  banks: number[];
 }
 
 const Registration = () => {
   const dispatch = useDispatch();
 
-  const handleOnSubmit = async (values: Values, { setSubmitting, resetForm }: FormikHelpers<any>) => {
+  const handleOnSubmit = async (
+    values: Values,
+    { setSubmitting, resetForm }: FormikHelpers<any>,
+  ) => {
     const body = {
       ...values,
       internalCode: parseInt(values.internalCode.toString()),
-      apiCalls: parseInt(values.apiCalls.toString())
-    } 
+      apiCalls: parseInt(values.apiCalls.toString()),
+    };
     try {
       await register(body);
       dispatch(
         openNotification({
-          severity: "success",
-          message: "User saved"
-        })
-      )
-      setSubmitting(false)
-      resetForm()
+          severity: 'success',
+          message: 'User saved',
+        }),
+      );
+      setSubmitting(false);
+      resetForm();
     } catch (error) {
       dispatch(
         openNotification({
-          severity: "error",
-          message: "An error has occurred"
-        })
-      )
-      setSubmitting(false)
+          severity: 'error',
+          message: 'An error has occurred',
+        }),
+      );
+      setSubmitting(false);
     }
-  }
+  };
 
   return (
     <Formik
@@ -108,32 +111,30 @@ const Registration = () => {
             <Grid item>
               <Field
                 component={SelectFormik}
-                formHelperText={{ children: 'What currency do you want to use?' }}
+                formHelperText={{
+                  children: 'What currency do you want to use?',
+                }}
                 id="currency"
                 name="currency"
                 labelId="currency-label"
                 label="Currency"
-              > 
-                {
-                  Object.keys(CURRENCIES).map(
-                    key => (
-                      <MenuItem
-                        key={`currency-option-${CURRENCIES[key as CURRENCIES]}`}
-                        value={CURRENCIES[key as CURRENCIES]}
-                      >
-                        {CURRENCIES[key as CURRENCIES]}
-                      </MenuItem>
-                    )
-                  )
-                }
+              >
+                {Object.keys(CURRENCIES).map((key) => (
+                  <MenuItem
+                    key={`currency-option-${CURRENCIES[key as CURRENCIES]}`}
+                    value={CURRENCIES[key as CURRENCIES]}
+                  >
+                    {CURRENCIES[key as CURRENCIES]}
+                  </MenuItem>
+                ))}
               </Field>
             </Grid>
             <Grid item>
               <FieldArray
                 name="banks"
-                render={arrayHelper => (
+                render={(arrayHelper) => (
                   <BankSelector
-                    labelText='Banks'
+                    labelText="Banks"
                     name="banks"
                     banksSelected={values.banks}
                     arrayHelper={arrayHelper}
@@ -154,7 +155,7 @@ const Registration = () => {
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};
 
-export default Registration
+export default Registration;

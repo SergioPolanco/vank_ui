@@ -6,17 +6,17 @@ import Notifications from '../notification';
 
 const ContainerStyled = styled(Container)`
   && {
-    padding-top: 10px
+    padding-top: 10px;
   }
-`
+`;
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       <ContainerStyled maxWidth="lg">
-        <Router/>
+        <Router />
       </ContainerStyled>
-      <Notifications timeout={3000}/>
+      <Notifications timeout={3000} />
     </div>
   );
 }

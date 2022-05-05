@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import NavLink from "./nav-link";
+import NavLink from './nav-link';
 
 const Navbar = () => {
   return (
@@ -20,13 +20,12 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <NavLink text="Registration" href='/registration'/>
-          <NavLink text="Users" href='/users'/>
-          <NavLink text="Invoices" href='/invoices'/>
+          <NavLink text="Registration" href="/registration" />
+          <NavLink text="Invoices" href="/invoices" />
         </Toolbar>
       </AppBar>
     </Box>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

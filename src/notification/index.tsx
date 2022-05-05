@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import { AlertColor } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
@@ -14,24 +14,27 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 interface NotificationsProps {
-  timeout: number
+  timeout: number;
 }
 
 const Notifications = ({ timeout }: NotificationsProps) => {
-  const message = useSelector<RootState, string | undefined>((state) => state.notification.message)
-  const open = useSelector<RootState, boolean>((state) => state.notification.open)
-  const severity = useSelector<RootState, AlertColor>((state) => state.notification.severity)
+  const message = useSelector<RootState, string | undefined>(
+    (state) => state.notification.message,
+  );
+  const open = useSelector<RootState, boolean>(
+    (state) => state.notification.open,
+  );
+  const severity = useSelector<RootState, AlertColor>(
+    (state) => state.notification.severity,
+  );
   const snackBarOrigin: SnackbarOrigin = {
     vertical: 'bottom',
     horizontal: 'right',
-  }
+  };
   const dispatch: AppDispatch = useDispatch();
   const handleClose = () => {
-    dispatch(
-      closeNotification()
-    )
+    dispatch(closeNotification());
   };
-  
 
   useEffect(() => {
     let TIMER: ReturnType<typeof setTimeout>;
@@ -39,7 +42,7 @@ const Notifications = ({ timeout }: NotificationsProps) => {
       TIMER = setTimeout(() => {
         dispatch(closeNotification());
       }, timeout);
-    }
+    };
     if (open) {
       handleTimeout();
     }
@@ -51,19 +54,17 @@ const Notifications = ({ timeout }: NotificationsProps) => {
     <Snackbar
       anchorOrigin={{
         vertical: snackBarOrigin.vertical,
-        horizontal: snackBarOrigin.horizontal
+        horizontal: snackBarOrigin.horizontal,
       }}
       open={open}
       onClose={handleClose}
-      key={
-        snackBarOrigin.vertical + snackBarOrigin.horizontal
-      }
+      key={snackBarOrigin.vertical + snackBarOrigin.horizontal}
     >
       <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
         {message}
       </Alert>
     </Snackbar>
-  )
-}
+  );
+};
 
-export default Notifications
+export default Notifications;

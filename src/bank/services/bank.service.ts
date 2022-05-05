@@ -1,7 +1,5 @@
-import api from "../../common/config/api";
+import api from '../../common/config/api';
 
-const fetchBanks = () => api.get('/v1/banks')
+const fetchBanks = () => api.get('/v1/banks');
 
-export {
-  fetchBanks
-}
+export { fetchBanks };

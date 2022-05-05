@@ -6,7 +6,7 @@ const RegistrationSchema = Yup.object().shape({
   tributaryId: Yup.string().required(),
   apiCalls: Yup.number().required(),
   currency: Yup.string().required(),
-  banks: Yup.array().of(Yup.number()).min(1)
-})
+  banks: Yup.array().of(Yup.number()).min(1),
+});
 
-export default RegistrationSchema
+export default RegistrationSchema;

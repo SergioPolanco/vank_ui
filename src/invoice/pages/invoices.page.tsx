@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material"
-import InvoicesTable from "../components/invoicesTable"
+import { Grid } from '@mui/material';
+import InvoicesTable from '../components/invoicesTable';
 
 const Invoice = () => {
   return (
@@ -8,7 +8,7 @@ const Invoice = () => {
         <InvoicesTable />
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default Invoice
+export default Invoice;

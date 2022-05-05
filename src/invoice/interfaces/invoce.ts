@@ -1,4 +1,4 @@
-import { User } from "../../user/interfaces/user";
+import { User } from '../../user/interfaces/user';
 
 export interface Invoice {
   id: number;
